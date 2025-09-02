@@ -425,7 +425,90 @@ const john: Person = { name: "John", age: 30 };</code></pre>
 <hr/>
 
 
+<h2>TypeScript Classes – Short Note</h2>
 
+<p>Classes in TypeScript are <strong>blueprints for creating objects</strong>, defining properties (data) and methods (functions) that operate on that data. They help organize code using Object-Oriented Programming (OOP) principles.</p>
+
+<h3>Why use classes?</h3>
+<ul>
+  <li><strong>OOP:</strong> Structure complex applications using real-world concepts.</li>
+  <li><strong>Code Reusability:</strong> Create multiple objects with the same properties and methods.</li>
+  <li><strong>Maintainability:</strong> Keep code modular, organized, and easier to debug.</li>
+</ul>
+
+<h3>Defining a Class:</h3>
+<p>Use the <code>class</code> keyword followed by properties and a constructor:</p>
+
+<pre><code>class Car {
+  make: string;
+  model: string;
+  year: number;
+
+  constructor(make: string, model: string, year: number) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+
+  accelerate(): void {
+    console.log("Car is accelerating!");
+  }
+}
+
+const myCar = new Car("Ford", "Mustang", 2023);
+myCar.accelerate();</code></pre>
+
+<h3>Access Modifiers:</h3>
+<ul>
+  <li><strong>Public:</strong> Accessible anywhere.
+    <pre><code>class Car {
+  public make: string;
+  constructor(make: string) { this.make = make; }
+  public getCarInfo(): string { return `Car: ${this.make}`; }
+}</code></pre>
+  </li>
+  <li><strong>Private:</strong> Accessible only inside the class.
+    <pre><code>class Car {
+  private engineType: string;
+  constructor(engineType: string) { this.engineType = engineType; }
+  public startEngine(): void { console.log(`Starting ${this.engineType}`); }
+}</code></pre>
+  </li>
+  <li><strong>Protected:</strong> Accessible in the class and subclasses.
+    <pre><code>class Vehicle {
+  protected year: number;
+  constructor(year: number) { this.year = year; }
+  protected getYear(): number { return this.year; }
+}
+
+class Car extends Vehicle {
+  public getCarInfo(): string { return `Model year ${this.getYear()}`; }
+}</code></pre>
+  </li>
+</ul>
+
+<h3>Inheritance:</h3>
+<p>Subclasses can inherit properties and methods from parent classes using <code>extends</code>:</p>
+
+<pre><code>class Animal {
+  public makeSound(): void { console.log("Generic animal sound"); }
+}
+
+class Dog extends Animal {
+  public bark(): void { console.log("Woof!"); }
+  public override makeSound(): void { this.bark(); }
+}
+
+const myAnimal = new Animal();
+myAnimal.makeSound();  // "Generic animal sound"
+
+const myDog = new Dog();
+myDog.makeSound();     // "Woof!"
+myDog.bark();          // "Woof!"</code></pre>
+
+<p><strong>Conclusion:</strong> Classes in TypeScript help structure code using OOP, enabling <strong>reusability, modularity, and maintainability</strong>.</p>
+
+<hr/>
 
 
 
