@@ -607,4 +607,52 @@ let origin: Point = { x: 0, y: 0 };</code></pre>
 <hr/>
 
 
+<h1>TypeScript Modules – Short Note</h1>
+
+<p>Modules in TypeScript are used to <strong>organize code into reusable units</strong>. They encapsulate related functionality, variables, classes, or interfaces, helping structure your codebase effectively. TypeScript supports both ES6-style modules (<code>import</code> / <code>export</code>) and CommonJS-style modules (<code>require()</code> / <code>module.exports</code>).</p>
+
+<h3>Syntax and Basic Usage:</h3>
+
+<h4>1. Exporting Members:</h4>
+<p>Use the <code>export</code> keyword to share variables, functions, classes, or interfaces:</p>
+<pre><code>// greeting.ts
+export const greeting = 'Hello, world!';
+export function greet(name: string): void {
+    console.log(`Hello, ${name}!`);
+}</code></pre>
+
+<h4>2. Importing Members:</h4>
+<p>Use the <code>import</code> keyword to use exported members in another module:</p>
+<pre><code>// app.ts
+import { greeting, greet } from './greeting';
+console.log(greeting); // Output: Hello, world!
+greet('Alice');        // Output: Hello, Alice!</code></pre>
+
+<h3>Types of Modules:</h3>
+<ul>
+  <li><strong>ES6 Modules:</strong> Use <code>import</code> and <code>export</code>. Standard for modern JavaScript.</li>
+  <li><strong>CommonJS Modules:</strong> Use <code>require()</code> and <code>module.exports</code>. Common in Node.js and legacy projects.</li>
+</ul>
+
+<h3>Advanced Module Techniques:</h3>
+
+<h4>1. Default Exports:</h4>
+<p>Export a single main value from a module:</p>
+<pre><code>// math.ts
+export default function add(a: number, b: number): number {
+    return a + b;
+}</code></pre>
+
+<h4>2. Namespace Imports:</h4>
+<p>Import all exported members into a namespace:</p>
+<pre><code>// app.ts
+import * as Greeting from './greeting';
+console.log(Greeting.greeting); // Output: Hello, world!
+Greeting.greet('Bob');          // Output: Hello, Bob!</code></pre>
+
+<p><strong>Conclusion:</strong> Modules in TypeScript enable <strong>code organization, reusability, and maintainability</strong> across projects by encapsulating related functionality and supporting multiple module formats.</p>
+
+
+<hr/>
+
 
