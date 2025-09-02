@@ -706,5 +706,246 @@ console.log(StatusCode[status]); // Output: NotFound</code></pre>
 
 <hr\>
 
+<h1>TypeScript Namespaces – Short Note</h1>
+
+<p>Namespaces in TypeScript help organize code in large-scale applications and <strong>prevent naming conflicts</strong>. They act as containers for related classes, interfaces, functions, and variables, providing a separate scope for these entities.</p>
+
+<h3>Defining a Namespace:</h3>
+<pre><code>namespace MyNamespace {
+  export class MyClass {
+    // ...
+  }
+
+  export function myFunction() {
+    // ...
+  }
+
+  export interface MyInterface {
+    // ...
+  }
+}</code></pre>
+<p>The <code>export</code> keyword makes entities available outside the namespace.</p>
+
+<h3>Using Namespaces:</h3>
+<pre><code>let myInstance = new MyNamespace.MyClass();
+MyNamespace.myFunction();
+let obj: MyNamespace.MyInterface = { /* ... */ };</code></pre>
+
+<h3>Nested Namespaces:</h3>
+<pre><code>namespace OuterNamespace {
+  export namespace InnerNamespace {
+    export class MyClass {
+      // ...
+    }
+  }
+}
+
+let myInstance = new OuterNamespace.InnerNamespace.MyClass();</code></pre>
+
+<h3>Advantages of Namespaces:</h3>
+<ul>
+  <li><strong>Organization and Structure:</strong> Logically group related code for easier management.</li>
+  <li><strong>Naming Conflicts:</strong> Separate scopes prevent conflicts between different parts of the application.</li>
+  <li><strong>Code Reuse:</strong> Namespaces can be imported and used across multiple files, promoting modularity.</li>
+</ul>
+
+<p><strong>Conclusion:</strong> Namespaces provide a <strong>structured, modular, and conflict-free</strong> way to organize TypeScript code in large applications.</p>
+
+<hr\>
+
+<h1>TypeScript Decorators – Short Note</h1>
+
+<p>Decorators in TypeScript are <strong>functions that can modify the behavior</strong> of classes, methods, properties, and function parameters. They allow adding metadata or annotations to code and performing custom logic at design-time or runtime.</p>
+
+<h3>What are Decorators?</h3>
+<p>Decorators are functions that take a target (class, method, property, or parameter) and optionally additional arguments, returning a modified version of the target:</p>
+<pre><code>function myDecorator(target, ...args) {
+  // Custom logic goes here
+  return target;
+}</code></pre>
+<p>To apply a decorator, prefix the target with <code>@</code>:</p>
+<pre><code>@myDecorator
+class MyClass {
+  // ...
+}</code></pre>
+
+<h3>Use Cases for Decorators:</h3>
+<ul>
+  <li><strong>Logging and Instrumentation:</strong> Log method calls or track performance.</li>
+  <li><strong>Validation and Sanitization:</strong> Validate or sanitize input data.</li>
+  <li><strong>Dependency Injection:</strong> Simplify injecting dependencies into classes or methods.</li>
+  <li><strong>Caching and Memoization:</strong> Cache function results or expensive computations.</li>
+  <li><strong>Metadata Storage:</strong> Store metadata for classes, methods, or properties (useful for serialization or reflection).</li>
+</ul>
+
+<h3>Example: Logging Decorator</h3>
+<pre><code>function logMethod(target, key, descriptor) {
+  const originalMethod = descriptor.value;
+
+  descriptor.value = function (...args) {
+    const result = originalMethod.apply(this, args);
+    console.log(`Method "${key}" called with arguments: ${JSON.stringify(args)} and returned: ${JSON.stringify(result)}`);
+    return result;
+  };
+
+  return descriptor;
+}
+
+class MyClass {
+  @logMethod
+  myMethod(a, b) {
+    return a + b;
+  }
+}
+
+const obj = new MyClass();
+const result = obj.myMethod(2, 3);
+// Output: Method "myMethod" called with arguments: [2,3] and returned: 5</code></pre>
+
+<p><strong>Conclusion:</strong> Decorators are a <strong>powerful feature</strong> in TypeScript that enhance code by allowing cross-cutting concerns like logging, validation, and metadata handling. When used correctly, they simplify and streamline large codebases.</p>
+<hr\>
+
+<h1>TypeScript Utility Types – Short Note</h1>
+
+<p>TypeScript provides a set of built-in <strong>utility types</strong> that help manipulate and transform existing types. These types improve <strong>type safety, expressiveness, and maintainability</strong> of your code.</p>
+
+<h3>What are Utility Types?</h3>
+<p>Utility types are types that operate on other types to create new types or modify existing ones. They act like type functions that take one or more types as input and return a transformed type.</p>
+
+<h3>Built-in Utility Types:</h3>
+<ul>
+  <li><strong>Partial&lt;T&gt;:</strong> Marks all properties of type T as optional.</li>
+  <li><strong>Required&lt;T&gt;:</strong> Marks all properties of type T as required.</li>
+  <li><strong>Readonly&lt;T&gt;:</strong> Marks all properties of type T as read-only.</li>
+  <li><strong>Record&lt;K, T&gt;:</strong> Creates an object type with keys of type K and values of type T.</li>
+  <li><strong>Pick&lt;T, K&gt;:</strong> Picks a subset of properties from type T based on keys K.</li>
+  <li><strong>Omit&lt;T, K&gt;:</strong> Omits a subset of properties from type T based on keys K.</li>
+</ul>
+
+<h3>Using Utility Types:</h3>
+<pre><code>interface Person {
+  name: string;
+  age: number;
+  email: string;
+}
+
+// All properties optional
+type PartialPerson = Partial&lt;Person&gt;;
+
+const person1: PartialPerson = {
+  name: 'John Doe',
+  // age and email are optional
+};</code></pre>
+
+<h3>Pick and Omit:</h3>
+<pre><code>interface User {
+  id: number;
+  name: string;
+  email: string;
+  age: number;
+}
+
+// Only id and name
+type UserInfo = Pick&lt;User, 'id' | 'name'&gt;;
+
+// Without age
+type UserWithoutAge = Omit&lt;User, 'age'&gt;;</code></pre>
+
+<h3>Custom Utility Types:</h3>
+<p>You can also create custom utility types for specific needs:</p>
+<pre><code>type Nullable&lt;T&gt; = {
+  [K in keyof T]: T[K] | null;
+};
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+type NullablePerson = Nullable&lt;Person&gt;;
+// Equivalent to { name: string | null, age: number | null }</code></pre>
+
+<p><strong>Conclusion:</strong> Utility types in TypeScript allow <strong>flexible, expressive, and type-safe</strong> transformations. They are essential for building robust and maintainable codebases, and custom utility types further extend their power.</p>
+
+
+<hr\>
+
+<h1>TypeScript Advanced Type Manipulation – Short Note</h1>
+
+<p>Advanced type manipulation in TypeScript allows creating sophisticated and expressive type definitions using the type system's powerful features.</p>
+
+<h3>1. Mapped Types</h3>
+<p>Mapped types create new types by transforming properties of an existing type:</p>
+<pre><code>type Readonly&lt;T&gt; = {
+  readonly [K in keyof T]: T[K];
+};
+
+interface Person {
+  name: string;
+  age: number;
+}
+
+type ReadonlyPerson = Readonly&lt;Person&gt;;
+// Equivalent to { readonly name: string; readonly age: number; }</code></pre>
+
+<h3>2. Conditional Types</h3>
+<p>Conditional types create type definitions based on certain conditions or constraints:</p>
+<pre><code>type IsEqual&lt;T, U&gt; = (&lt;G&gt;() =&gt; G extends T ? 1 : 2) extends (&lt;G&gt;() =&gt; G extends U ? 1 : 2) ? true : false;
+
+type Test = IsEqual&lt;string, string&gt;; // true
+type Test2 = IsEqual&lt;string, number&gt;; // false</code></pre>
+
+<h3>3. Indexed Access Types</h3>
+<p>Indexed access types allow accessing and manipulating specific properties of an object type:</p>
+<pre><code>interface Person {
+  name: string;
+  age: number;
+  email?: string;
+}
+
+type PersonName = Person["name"]; // string
+type PersonAgeOrEmail = Person["age" | "email"]; // number | string | undefined</code></pre>
+
+<h3>4. Template Literal Types</h3>
+<p>Template literal types create new types by concatenating string literals:</p>
+<pre><code>type World = "hello";
+type Greeting = `${World}, world!`; // "hello, world!"
+
+type Paths = "/app" | "/dashboard" | "/settings";
+type FullPath = `/api${Paths}`; // "/api/app" | "/api/dashboard" | "/api/settings"</code></pre>
+
+<h3>5. Recursive Type Aliases</h3>
+<p>Recursive type aliases define types that reference themselves, useful for self-referential structures:</p>
+<pre><code>interface LinkedListNode&lt;T&gt; {
+  value: T;
+  next?: LinkedListNode&lt;T&gt;;
+}</code></pre>
+
+<h3>6. Discriminated Unions</h3>
+<p>Discriminated unions use a literal property to distinguish between different types in a union:</p>
+<pre><code>interface Circle {
+  kind: "circle";
+  radius: number;
+}
+
+interface Square {
+  kind: "square";
+  sideLength: number;
+}
+
+type Shape = Circle | Square;
+
+function area(shape: Shape) {
+  switch (shape.kind) {
+    case "circle":
+      return Math.PI * shape.radius ** 2;
+    case "square":
+      return shape.sideLength ** 2;
+  }
+}</code></pre>
+
+<p><strong>Conclusion:</strong> Advanced type manipulation in TypeScript enables <strong>flexible, type-safe, and expressive</strong> code, especially useful for complex data structures and reusable type utilities.</p>
+
+
 
 
