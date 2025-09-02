@@ -656,3 +656,55 @@ Greeting.greet('Bob');          // Output: Hello, Bob!</code></pre>
 <hr/>
 
 
+<h1>TypeScript Enums – Short Note</h1>
+
+<p>Enums (short for "enumerations") allow developers to define a set of <strong>named constants</strong> in TypeScript. They improve <strong>readability</strong> and <strong>type safety</strong> by giving symbolic names to related values.</p>
+
+<h3>Basic Enum Example:</h3>
+<pre><code>enum Day {
+  Sunday,
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday
+}</code></pre>
+<p>By default, TypeScript assigns numeric values starting from 0: <code>Day.Sunday = 0</code>, <code>Day.Monday = 1</code>, etc.</p>
+
+<h3>Using Enum Values:</h3>
+<pre><code>function getDayName(day: Day): string {
+  switch (day) {
+    case Day.Sunday: return "Sunday";
+    case Day.Monday: return "Monday";
+    case Day.Tuesday: return "Tuesday";
+    case Day.Wednesday: return "Wednesday";
+    case Day.Thursday: return "Thursday";
+    case Day.Friday: return "Friday";
+    case Day.Saturday: return "Saturday";
+    default: return "Unknown";
+  }
+}
+
+console.log(getDayName(Day.Friday)); // Output: Friday</code></pre>
+
+<h3>Custom Enum Values:</h3>
+<pre><code>enum StatusCode {
+  OK = 200,
+  NotFound = 404,
+  InternalServerError = 500
+}</code></pre>
+<p>Here, each enum member is assigned a custom numeric value.</p>
+
+<h3>Accessing Enum Values and Names:</h3>
+<pre><code>const status = StatusCode.NotFound;
+
+console.log(status); // Output: 404
+console.log(StatusCode[status]); // Output: NotFound</code></pre>
+
+<p><strong>Conclusion:</strong> Enums provide a <strong>structured and readable</strong> way to work with sets of related constants in TypeScript, supporting both default and custom values.</p>
+
+<hr\>
+
+
+
