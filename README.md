@@ -388,7 +388,7 @@ Here, <code>DataPoint</code> must always have exactly three numbers.
 
 <hr/>
 
-<h2>TypeScript Interfaces – Short Note</h2>
+<h1>TypeScript Interfaces – Short Note</h1>
 
 <p>Interfaces in TypeScript act like <strong>blueprints or contracts</strong> for objects, defining what properties an object should have and their types. They help ensure <strong>type safety</strong>, catch errors early, and improve code readability.</p>
 
@@ -425,7 +425,7 @@ const john: Person = { name: "John", age: 30 };</code></pre>
 <hr/>
 
 
-<h2>TypeScript Classes – Short Note</h2>
+<h1>TypeScript Classes – Short Note</h1>
 
 <p>Classes in TypeScript are <strong>blueprints for creating objects</strong>, defining properties (data) and methods (functions) that operate on that data. They help organize code using Object-Oriented Programming (OOP) principles.</p>
 
@@ -510,6 +510,61 @@ myDog.bark();          // "Woof!"</code></pre>
 
 <hr/>
 
+<h1>TypeScript Generics – Short Note</h1>
+
+<p>Generics in TypeScript allow you to create <strong>reusable components</strong> that work with various data types while maintaining <strong>type safety</strong>. They act as placeholders for types that get specified when the component is used.</p>
+
+<h3>Using Generics with Functions:</h3>
+<p>Generics enable functions to work with multiple data types:</p>
+<pre><code>function identity&lt;T&gt;(arg: T): T {
+  return arg;
+}
+
+function firstElement&lt;T&gt;(arr: T[]): T {
+  return arr[0];
+}
+
+const numArray = [1, 2, 3, 4, 5];
+console.log(firstElement(numArray)); // 1
+
+const strArray = ['a', 'b', 'c'];
+console.log(firstElement(strArray)); // 'a'</code></pre>
+
+<h3>Using Generics with Classes:</h3>
+<p>Generics make classes reusable with different data types:</p>
+<pre><code>class Stack&lt;T&gt; {
+  private items: T[] = [];
+
+  push(item: T): void {
+    this.items.push(item);
+  }
+
+  pop(): T | undefined {
+    return this.items.pop();
+  }
+}
+
+const numberStack = new Stack&lt;number&gt;();
+numberStack.push(1); numberStack.push(2);
+console.log(numberStack.pop()); // 2
+
+const stringStack = new Stack&lt;string&gt;();
+stringStack.push('a'); stringStack.push('b');
+console.log(stringStack.pop()); // 'b'</code></pre>
+
+<h3>Using Generics with Interfaces:</h3>
+<p>Generics allow interfaces to be flexible and reusable:</p>
+<pre><code>interface Pair&lt;T, U&gt; {
+  first: T;
+  second: U;
+}
+
+const pair1: Pair&lt;number, string&gt; = { first: 1, second: 'a' };
+const pair2: Pair&lt;string, boolean&gt; = { first: 'hello', second: true };</code></pre>
+
+<p><strong>Conclusion:</strong> Generics in TypeScript help you write <strong>flexible, reusable, and type-safe code</strong>, suitable for functions, classes, and interfaces.</p>
+
+<hr/>
 
 
 
