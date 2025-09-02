@@ -566,5 +566,45 @@ const pair2: Pair&lt;string, boolean&gt; = { first: 'hello', second: true };</co
 
 <hr/>
 
+<h1>TypeScript Type Aliases – Short Note</h1>
+
+<p>In TypeScript, <strong>type aliases</strong> allow you to define custom names for existing types, improving <strong>readability, maintainability, and code clarity</strong>. They provide alternative labels for types without creating new types.</p>
+
+<h3>Syntax:</h3>
+<pre><code>type AliasName = ExistingType;</code></pre>
+<p><strong>AliasName:</strong> The custom name for the type.<br>
+<strong>ExistingType:</strong> The underlying type (primitive, array, union, or another type alias).</p>
+
+<h3>Examples:</h3>
+
+<h4>Primitive Types:</h4>
+<pre><code>type Age = number;
+type Name = string;
+
+let age: Age = 30;
+let fullName: Name = "Alice Bob";</code></pre>
+
+<h4>Arrays:</h4>
+<pre><code>type ProductIds = number[]; // Array of numbers
+type ColorList = string[];     // Array of strings
+
+let productIDs: ProductIds = [123, 456, 789];
+let availableColors: ColorList = ["red", "green", "blue"];</code></pre>
+
+<h4>Union Types:</h4>
+<pre><code>type LoginResult = "success" | "failure";
+
+let loginStatus: LoginResult; // Can be either "success" or "failure"</code></pre>
+
+<h4>Complex Object Types:</h4>
+<pre><code>type Point = { x: number; y: number }; // Represents a point in 2D space
+
+let origin: Point = { x: 0, y: 0 };</code></pre>
+
+<p><strong>Conclusion:</strong> Type aliases are a valuable TypeScript feature for <strong>creating descriptive, reusable types</strong>, enhancing code safety, readability, and maintainability.</p>
+
+
+<hr/>
+
 
 
